@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - task-1
+      - task-2
+      - task-3
   pull_request:
     branches:
       - main
@@ -20,12 +22,14 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.11
+        python-version: "3.11"
 
     - name: Install dependencies
       run: |
+        pip install --upgrade pip
         pip install -r requirements.txt
+        pip install vaderSentiment pytest
 
     - name: Run tests
       run: |
-        pytest
+        pytest tests/ -v
